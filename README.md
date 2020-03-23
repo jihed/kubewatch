@@ -62,6 +62,8 @@ resourcesToWatch:
   services: true
   secret: false
   configmap: false
+  ingress: false
+  podsecuritypolicy: false
 slack:
   channel: '#YOUR_CHANNEL'
   token: 'xoxb-YOUR_TOKEN'
@@ -110,6 +112,7 @@ resource:
       secret: false
       configmap: false
       ingress: false
+      podsecuritypolicy: true
 ```
 
 #### Working with RBAC
@@ -118,12 +121,6 @@ Kubernetes Engine clusters running versions 1.6 or higher introduced Role-Based 
 
 ```console
 $ kubectl create -f kubewatch-service-account.yaml
-```
-
-If you do not have permission to create it, you need to become a admin first. For example, in GKE you would run:
-
-```
-$ kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=REPLACE_EMAIL_HERE
 ```
 
 Edit `kubewatch.yaml`, and create a new field under `spec` with `serviceAccountName: kubewatch`, you can achieve this by running:
