@@ -7,8 +7,8 @@ data:
     namespace: ""
     handler:
       slack:
-        token: xoxb-1021901206694-1019707486976-cXkGZqiUQhumMdeSb6lopdZ2
-        channel: bot
+        token: XXXXXXXXXXXX
+        channel: XXXXXXXXXX
     resource:
       deployment: false
       replicationcontroller: false
