@@ -63,6 +63,8 @@ func New(obj interface{}, action string) Event {
 		kind = "namespace"
 	case *ext_v1beta1.Ingress:
 		kind = "ingress"
+	case *ext_v1beta1.PodSecurityPolicy:
+		kind = "podsecuritypolicy"
 	case *api_v1.PersistentVolume:
 		kind = "persistent volume"
 	case *api_v1.Pod:

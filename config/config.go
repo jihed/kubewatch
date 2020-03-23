@@ -52,6 +52,7 @@ type Resource struct {
 	Secret                bool `json:"secret"`
 	ConfigMap             bool `json:"configmap"`
 	Ingress               bool `json:"ing"`
+	PodSecurityPolicy     bool `json:"psp"`
 }
 
 // Config struct contains kubewatch configuration
@@ -188,6 +189,9 @@ func (c *Config) CheckMissingResourceEnvvars() {
 	}
 	if !c.Resource.Ingress && os.Getenv("KW_INGRESS") == "true" {
 		c.Resource.Ingress = true
+	}
+	if !c.Resource.PodSecurityPolicy && os.Getenv("KW_PODSECURITYPOLICY") == "true" {
+		c.Resource.PodSecurityPolicy = true
 	}
 	if (c.Handler.Slack.Channel == "") && (os.Getenv("SLACK_CHANNEL") != "") {
 		c.Handler.Slack.Channel = os.Getenv("SLACK_CHANNEL")

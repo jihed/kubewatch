@@ -129,6 +129,10 @@ func configureResource(operation string, cmd *cobra.Command, conf *config.Config
 			"ing",
 			&conf.Resource.Ingress,
 		},
+		{
+			"psp",
+			&conf.Resource.PodSecurityPolicy,
+		},
 	}
 
 	for _, flag := range flags {
@@ -173,4 +177,6 @@ func init() {
 	resourceConfigCmd.PersistentFlags().Bool("secret", false, "watch for plain secrets")
 	resourceConfigCmd.PersistentFlags().Bool("cm", false, "watch for plain configmaps")
 	resourceConfigCmd.PersistentFlags().Bool("ing", false, "watch for ingresses")
+	// Add psp to watch.
+	resourceConfigCmd.PersistentFlags().Bool("psp", false, "watch for podsecuritypolicy")
 }

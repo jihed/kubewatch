@@ -337,6 +337,27 @@ func Start(conf *config.Config, eventHandler handlers.Handler) {
 
 		go c.Run(stopCh)
 	}
+	if conf.Resource.PodSecurityPolicy {
+		informer := cache.NewSharedIndexInformer(
+			&cache.ListWatch{
+				ListFunc: func(options meta_v1.ListOptions) (runtime.Object, error) {
+					return kubeClient.ExtensionsV1beta1().PodSecurityPolicies().List(options) 
+				},
+				WatchFunc: func(options meta_v1.ListOptions) (watch.Interface, error) {
+					return kubeClient.ExtensionsV1beta1().PodSecurityPolicies().Watch(options)
+				},
+			},
+			&ext_v1beta1.PodSecurityPolicy{},
+			0, //Skip resync
+			cache.Indexers{},
+		)
+	
+		c := newResourceController(kubeClient, eventHandler, informer, "podsecuritypolicy")
+		stopCh := make(chan struct{})
+		defer close(stopCh)
+	
+		go c.Run(stopCh)
+	}
 
 	sigterm := make(chan os.Signal, 1)
 	signal.Notify(sigterm, syscall.SIGTERM)

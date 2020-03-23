@@ -7,8 +7,8 @@ data:
     namespace: ""
     handler:
       slack:
-        token: <token>
-        channel: <channel>
+        token: xoxb-1021901206694-1019707486976-cXkGZqiUQhumMdeSb6lopdZ2
+        channel: bot
     resource:
       deployment: false
       replicationcontroller: false
@@ -18,3 +18,4 @@ data:
       pod: true
       secret: false
       configmap: false
+      psp: true
